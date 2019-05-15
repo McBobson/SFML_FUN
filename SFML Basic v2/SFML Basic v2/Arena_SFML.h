@@ -12,22 +12,23 @@ class Arena{
 
 public:
 
-	Ekran E1;
 	char **tablica;
 	int **wagi;
 	string **znaki;
 	int **Tab_Rozx;
 	int **Tab_Rozy;
 	int pom[2];
-	string poms[24] = { "P1","P2","P3","P4","P9","P10","P11","P12","P5","P6","P7","P8","Pc1","Pc2","Pc3","Pc4","Pc9","Pc10","Pc11","Pc12","Pc5","Pc6","Pc7","Pc8" };
+	string poms[24] = { "P1","P2","P3","P4","P9","P10","P11","P12","P5","P6","P7","P8","Pc12","Pc11","Pc10","Pc9","Pc4","Pc3","Pc2","Pc1","Pc8","Pc7","Pc6","Pc5" };
 
 
 	Arena();
 	Arena(int);
 	~Arena();
 
-	void Animacja(int, int, int, int);
-	int Przesun_Pionek(int, int, int, int, int);
+	void Animacja(int, int, int, int,Ekran&);
+	void Wyczysc_Pole(int, int, Ekran&);
+	void Zamien_SFML(int, int, Ekran&);
+	int Przesun_Pionek(int, int, int, int, int,Ekran&);
 	bool Czy_Jest_Pionek(int, int);
 	bool Czy_Jest_W_Arenie(int, int);
 	int Kierunek_Bicia(int[]);
@@ -387,7 +388,7 @@ bool Arena::Czy_Ruch_W_Tyl(int pom[], char znak)
 	{
 		return true;
 	}
-	else if ((znak == 'X' && pom[0] < 0 || znak == 'O' && pom[0] > 0))
+	else if (znak == 'X' && pom[0] < 0 || znak == 'X' && pom[0] > 0 || znak == 'O' && pom[0] > 0 || znak == 'O' && pom[0] < 0)
 	{
 		return true;
 	}
@@ -542,7 +543,7 @@ bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	return false;
 }
 
-int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz)
+int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz, Ekran &E)
 {
 	pom[0] = x2 - x1;
 	pom[1] = y2 - y1;
@@ -561,57 +562,84 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz)
 						{
 						case 0:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 - 1][y2 - 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 - 1, y2 - 1, E);
+
+							znaki[x2 - 1][y2 - 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 - 1][y2 - 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
-							Animacja(x1, y1, x2, y2);
 						}
 						break;
 
 						case 1:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 - 1][y2 + 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 - 1, y2 + 1, E);
+
+							znaki[x2 - 1][y2 + 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 - 1][y2 + 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
-							Animacja(x1, y1, x2, y2);
+							Animacja(x1, y1, x2, y2,E);
 						}
 						break;
 
 						case 2:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 + 1][y2 - 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 + 1, y2 - 1, E);
+
+							znaki[x2 + 1][y2 - 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 + 1][y2 - 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
-							Animacja(x1, y1, x2, y2);
+							Animacja(x1, y1, x2, y2,E);
 						}
 						break;
 
 						case 3:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 + 1][y2 + 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 + 1, y2 + 1, E);
+
+							znaki[x2 + 1][y2 + 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 + 1][y2 + 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
-							Animacja(x1, y1, x2, y2);
+							Animacja(x1, y1, x2, y2,E);
 						}
 						break;
 						}
@@ -634,61 +662,92 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz)
 						{
 						case 0:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 - 1][y2 - 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 - 1, y2 - 1, E);
+
+							znaki[x2 - 1][y2 - 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 - 1][y2 - 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
+							Zamien_SFML(x2 - 1, y2 - 1, E);
 							Zamien(tablica[x2 - 1][y2 - 1], x2 - 1, y2 - 1);
-							Animacja(x1, y1, x2, y2);
+							
 						}
 						break;
 
 						case 1:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 - 1][y2 + 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 - 1, y2 + 1, E);
+
+							znaki[x2 - 1][y2 + 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 - 1][y2 + 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
+							Zamien_SFML(x2 - 1, y2 + 1, E);
 							Zamien(tablica[x2 - 1][y2 + 1], x2 - 1, y2 + 1);
-							Animacja(x1, y1, x2, y2);
+							
 						}
 						break;
 
 						case 2:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 + 1][y2 - 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2+1, y2-1, E);
+
+							znaki[x2 + 1][y2 - 1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 + 1][y2 - 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
+							Zamien_SFML(x2 + 1, y2 - 1, E);
 							Zamien(tablica[x2 + 1][y2 - 1], x2 + 1, y2 - 1);
-							Animacja(x1, y1, x2, y2);
 						}
 						break;
 
 						case 3:
 						{
+							Wyczysc_Pole(x2, y2, E);
 							tablica[x2 + 1][y2 + 1] = tablica[x1][y1];
 							tablica[x1][y1] = ' ';
 							tablica[x2][y2] = ' ';
+
+							Animacja(x1, y1, x2 + 1, y2 + 1, E);
+
+							znaki[x2+1][y2+1] = znaki[x1][y1];
+							znaki[x1][y1] = " ";
+							znaki[x2][y2] = " ";
 
 							wagi[x2 + 1][y2 + 1] = wagi[x1][y1];
 							wagi[x1][y1] = 0;
 							wagi[x2][y2] = 0;
 
+							Zamien_SFML(x2 + 1, y2 + 1, E);
 							Zamien(tablica[x2 + 1][y2 + 1], x2 + 1, y2 + 1);
-							Animacja(x1, y1, x2, y2);
+		
 						}
 						break;
 						}
@@ -708,10 +767,15 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz)
 				tablica[x2][y2] = tablica[x1][y1];
 				tablica[x1][y1] = ' ';
 
+				Animacja(x1, y1, x2, y2, E);
+
+				znaki[x2][y2] = znaki[x1][y1];
+				znaki[x1][y1] = " ";
+
 				wagi[x2][y2] = wagi[x1][y1];
 				wagi[x1][y1] = 0;
 
-				Animacja(x1, y1, x2, y2);
+				Zamien_SFML(x2 , y2 , E);
 				Zamien(tablica[x2][y2], x2, y2);
 				return 0;
 			}
@@ -1015,13 +1079,13 @@ ostream& operator << (ostream& wyjscie, Arena& A) {
 	return wyjscie;
 }
 
-void Arena::Animacja(int xp, int yp,int xk,int yk)
+void Arena::Animacja(int xp, int yp,int xk,int yk, Ekran &E1)
 {
 	string znakpom;
 	int pomx, pomy;
-
+	
 	znakpom = znaki[xp][yp];
-
+	
 	if (znakpom == "P1")
 	{
 		pomx = Tab_Rozx[xk][yk];
@@ -1167,6 +1231,313 @@ void Arena::Animacja(int xp, int yp,int xk,int yk)
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
 		E1.Pc12.setPosition(pomx, pomy);
+	}
+}
+
+void Arena::Wyczysc_Pole(int xk, int yk, Ekran &E1)
+{
+	string znakpom;
+	int pomx, pomy;
+
+	znakpom = znaki[xk][yk];
+
+	if (znakpom == "P1")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P1.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P2")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P2.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P3")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P3.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P4")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P4.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P5")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P5.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P6")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P6.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P7")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P7.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P8")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P8.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P9")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P9.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P10")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P10.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P11")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P11.setTexture(E1.Pole);
+	}
+	else if (znakpom == "P12")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P12.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc1")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc1.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc2")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc2.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc3")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc3.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc4")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc4.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc5")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc5.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc6")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc6.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc7")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc7.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc8")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc8.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc9")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc9.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc10")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc10.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc11")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc11.setTexture(E1.Pole);
+	}
+	else if (znakpom == "Pc12")
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc12.setTexture(E1.Pole);
+	}
+}
+
+void Arena::Zamien_SFML(int xk, int yk, Ekran& E1)
+{
+	string znakpom;
+	int pomx, pomy;
+
+	znakpom = znaki[xk][yk];
+
+	if (wagi[xk][yk] == 1 && znakpom == "P1" && xk==7)
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P1.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P2" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P2.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P3" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P3.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P4" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P4.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P5" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P5.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P6" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P6.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P7" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P7.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P8" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P8.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P9" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P9.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P10" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P10.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P11" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P11.setTexture(E1.DamkaB);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "P12" && xk == 7))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.P12.setTexture(E1.DamkaB);
+	}
+	
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc1" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc1.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc2" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc2.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc3" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc3.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc4" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc4.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc5" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc5.setTexture(E1.DamkaC);
+	}
+	else if (wagi[xk][yk] == 1 && znakpom == "Pc6" && xk == 0)
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc6.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc7" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc7.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc8" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc8.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc9" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc9.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc10" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc10.setTexture(E1.DamkaC);
+	}
+	else if (wagi[xk][yk] == 1 && znakpom == "Pc11" && xk == 0)
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc11.setTexture(E1.DamkaC);
+	}
+	else if ((wagi[xk][yk] == 1 && znakpom == "Pc12" && xk == 0))
+	{
+		pomx = Tab_Rozx[xk][yk];
+		pomy = Tab_Rozy[xk][yk];
+		E1.Pc12.setTexture(E1.DamkaC);
 	}
 }
 

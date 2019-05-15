@@ -17,6 +17,9 @@ public:
 
 	sf::Texture Pionek;
 	sf::Texture PionekC;
+	sf::Texture DamkaB;
+	sf::Texture DamkaC;
+	sf::Texture Pole;
 	sf::Texture texture;
 	sf::Sprite Sprite;
 	sf::Sprite P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12;
@@ -33,6 +36,10 @@ void Ekran::Tworz_Plansze()
 	texture.setSmooth(true);
 
 	Sprite.setTexture(texture);
+
+	Pole.loadFromFile("Pole.png");
+	DamkaB.loadFromFile("Bia³a_D.png");
+	DamkaC.loadFromFile("Czarna_D.png");
 }
 
 void Ekran::Ulozenie_Pionkow()
