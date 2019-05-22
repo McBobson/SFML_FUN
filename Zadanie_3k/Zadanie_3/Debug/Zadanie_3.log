@@ -1,0 +1,6 @@
+﻿  Zadanie_3.cpp
+f:\projekty\zadanie_3\zadanie_3\zadanie_3.cpp(12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+f:\projekty\zadanie_3\zadanie_3\zadanie_3.cpp(42): warning C4101: "a1": lokalna zmienna, do której nie istnieje odwołanie
+f:\projekty\zadanie_3\zadanie_3\zadanie_3.cpp(42): warning C4101: "b1": lokalna zmienna, do której nie istnieje odwołanie
+f:\projekty\zadanie_3\zadanie_3\arena.h(686): warning C4715: "Arena::Przesun_Pionek”: niewszystkie ścieżki kodu zwracają wartość
+  Zadanie_3.vcxproj -> F:\Projekty\Zadanie_3\Debug\Zadanie_3.exe
