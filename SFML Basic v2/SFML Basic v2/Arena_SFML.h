@@ -44,7 +44,7 @@ public:
 
 	void Ekran_Koncowy(int, int, int);
 
-	int Czy_Mozliwe_Bicie_AI(int, int);
+	int Czy_Mozliwe_Bicie_AI(int, int,int,int);
 
 
 };
@@ -543,7 +543,7 @@ bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	return false;
 }
 
-int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz, Ekran &E)
+int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E)
 {
 	pom[0] = x2 - x1;
 	pom[1] = y2 - y1;
@@ -649,7 +649,7 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz, Ekran &E)
 					else
 					{
 						cout << "Bicie nie jest mozliwe" << endl;
-						return 0;
+						return -1;
 					}
 
 				}
@@ -757,7 +757,7 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz, Ekran &E)
 					else
 					{
 						cout << "Bicie nie jest mozliwe" << endl;
-						return 0;
+						return -1;
 					}
 				}
 
@@ -779,7 +779,10 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz, Ekran &E)
 				Zamien(tablica[x2][y2], x2, y2);
 				return 0;
 			}
-			else cout << "Nie uciekamy z frontu!!!" << endl;
+			else {
+				cout << "Nie uciekamy z frontu!!!" << endl;
+				return -1;
+			}
 
 		}
 		else
@@ -788,13 +791,13 @@ int Arena::Przesun_Pionek(int y1, int x1, int y2, int x2, int gracz, Ekran &E)
 			cout << "Czy jest pionek: " << Czy_Jest_Pionek(x1, y1) << endl;
 			cout << "Czy jest w arenie: " << Czy_Jest_W_Arenie(x2, y2) << endl;
 			cout << "Czy prawidlowy ruch: " << Czy_Prawidlowy_Ruch(pom, tablica[x1][y1]) << endl;
-			return 0;
+			return -1;
 		}
 	}
 	else
 	{
 		cout << "Trzymaj sie swoich pionow rycerzu!!!!" << endl;
-		return 0;
+		return -1;
 	}
 
 
@@ -1545,7 +1548,7 @@ void Arena::Zamien_SFML(int xk, int yk, Ekran& E1)
 
 
 
-int Arena::Czy_Mozliwe_Bicie_AI(int x, int y)
+int Arena::Czy_Mozliwe_Bicie_AI(int x, int y, int xzabr, int yzabr)
 {
 	int LUp[2] = { -1,-1 };
 	int RUp[2] = { -1,1 };
@@ -1553,43 +1556,47 @@ int Arena::Czy_Mozliwe_Bicie_AI(int x, int y)
 	int LDown[2] = { 1,-1 };
 
 
-	if (Czy_Jest_W_Arenie(x - 1, y - 1) && x - 1 != 7 && x - 1 != 0 && y - 1 != 7 && y - 1 != 0)
+	if (Czy_Jest_W_Arenie(x - 1, y - 1) && x - 1 != 7 && x - 1 != 0 && y - 1 != 7 && y - 1 != 0 && (x - 1 != xzabr || y - 1 != yzabr))
 	{
 		//cout << "Bicie lewo gora" << endl;
 		//cout << x << " " << y << endl;
 		if (Bicie(x - 1, y - 1, LUp))
 		{
 			//cout << "Tak1" << endl;
+			//system("pause");
 			return 0;
 		}
 	}
 
-	if (Czy_Jest_W_Arenie(x - 1, y + 1) && x - 1 != 7 && x - 1 != 0 && y + 1 != 7 && y + 1 != 0)
+	if (Czy_Jest_W_Arenie(x - 1, y + 1) && x - 1 != 7 && x - 1 != 0 && y + 1 != 7 && y + 1 != 0 && (x - 1 != xzabr || y + 1 != yzabr))
 	{
 		//cout << "Bicie prawo gora" << endl;
 		if (Bicie(x - 1, y + 1, RUp))
 		{
 			//cout << "Tak2" << endl;
+			//system("pause");
 			return 1;
 		}
 	}
 
-	if (Czy_Jest_W_Arenie(x + 1, y + 1) && x + 1 != 7 && x + 1 != 0 && y + 1 != 7 && y + 1 != 0)
+	if (Czy_Jest_W_Arenie(x + 1, y + 1) && x + 1 != 7 && x + 1 != 0 && y + 1 != 7 && y + 1 != 0 && (x + 1 != xzabr || y + 1 != yzabr))
 	{
 		//cout << "Bicie prawo dol" << endl;
 		if (Bicie(x + 1, y + 1, RDown))
 		{
 			//cout << "Tak3" << endl;
+			//system("pause");
 			return 3;
 		}
 	}
 
-	if (Czy_Jest_W_Arenie(x + 1, y - 1) && x + 1 != 7 && x + 1 != 0 && y - 1 != 7 && y - 1 != 0)
+	if (Czy_Jest_W_Arenie(x + 1, y - 1) && x + 1 != 7 && x + 1 != 0 && y - 1 != 7 && y - 1 != 0 && (x + 1 != xzabr || y - 1 != yzabr))
 	{
 		//cout << "Bicie lewo dol" << endl;
 		if (Bicie(x + 1, y - 1, LDown))
 		{
 			//cout << "Tak4" << endl;
+			//system("pause");
 			return 2;
 		}
 	}
