@@ -21,7 +21,9 @@ public:
 	sf::Texture DamkaC;
 	sf::Texture Pole;
 	sf::Texture texture;
+	sf::Texture textureMenu;
 	sf::Sprite Sprite;
+	sf::Sprite Menu;
 	sf::Sprite P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12;
 	sf::Sprite Pc1, Pc2, Pc3, Pc4, Pc5, Pc6, Pc7, Pc8, Pc9, Pc10, Pc11, Pc12;
 
@@ -37,14 +39,19 @@ void Ekran::Tworz_Plansze()
 
 	Sprite.setTexture(texture);
 
+	textureMenu.loadFromFile("Menu_Glowne.png");
+	textureMenu.setSmooth(true);
+
+	Menu.setTexture(textureMenu);
+
 	Pole.loadFromFile("Pole.png");
-	DamkaB.loadFromFile("Bia³a_D.png");
-	DamkaC.loadFromFile("Czarna_D.png");
+	DamkaB.loadFromFile("MonD.png");
+	DamkaC.loadFromFile("WitD.png");
 }
 
 void Ekran::Ulozenie_Pionkow()
 {
-	Pionek.loadFromFile("bia³y.png");
+	Pionek.loadFromFile("Mon.png");
 	Pionek.setSmooth(true);
 
 	P1.setTexture(Pionek);
@@ -102,7 +109,7 @@ void Ekran::Ulozenie_Pionkow()
 
 	//////////////////////////////////////////////////////////////////////////////////
 
-	PionekC.loadFromFile("czarne.png");
+	PionekC.loadFromFile("Wit.png");
 	PionekC.setSmooth(true);
 
 	Pc1.setTexture(PionekC);

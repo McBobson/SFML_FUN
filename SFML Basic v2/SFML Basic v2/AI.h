@@ -9,10 +9,12 @@ using namespace std;
 class AI
 {
 	int pom[2], bicia;
+	int TabRuch[3], TabBicie[3];
+	int punkty = 0;
 	//int tablicaWagRuchow[ROZ][ROZ]; 
 
 public:
-	int TabRuch[3], TabBicie[3], TabKoniec[4];
+	int TabKoniec[4];
 	int tablicaWagRuchow[ROZ][ROZ];
 	int waga = 0;
 	//vector<int> dane1;
@@ -54,11 +56,18 @@ public:
 		TabKoniec[3] = 0;
 	}
 
+	int Zwroc_Punkty()
+	{
+		return punkty;
+	}
+
 	int Ilosc_Bic(int, int, Arena&);
 
 	int Mozliwy_Ruch_AI(int, int, Arena&);
 
 	int Mozliwe_Bicie_AI(int, int, Arena&);
+
+	int Czy_Mozliwe_Bicie_AI(int, int, int, int, Arena&);
 
 	void Koncowy_Ruch(Arena&);
 
@@ -72,33 +81,33 @@ int AI::Ilosc_Bic(int xp, int yp, Arena &A)
 
 	int lastx = -5, lasty = -5;
 
-	while (A.Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty) != -1)
+	while (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) != -1)
 	{
 		//cout<<"LASAGNA"<<endl;
 		//cout << A.Czy_Mozliwe_Bicie_AI(yp, xp);
 		//cout << lasty<< " " << lastx << endl;
 		//cout << A.Czy_Mozliwe_Bicie_AI(yp, xp, lasty, lastx) << endl;
 
-		if (A.Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty) == 0)
+		if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 0)
 		{
 			cout << "lg";
 			xk = xp - 1;
 			yk = yp - 1;
 
 		}
-		else if (A.Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty) == 1)
+		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 1)
 		{
 			cout << "pg";
 			xk = xp + 1;
 			yk = yp - 1;
 		}
-		else if (A.Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty) == 2)
+		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 2)
 		{
 			cout << "ld";
 			xk = xp - 1;
 			yk = yp + 1;
 		}
-		else if (A.Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty) == 3)
+		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 3)
 		{
 			cout << "pd";
 			xk = xp + 1;
@@ -107,7 +116,7 @@ int AI::Ilosc_Bic(int xp, int yp, Arena &A)
 
 
 
-		switch (A.Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty))
+		switch (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A))
 		{
 		case 0:
 		{
@@ -229,7 +238,7 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A)
 {
 	int wagakoncowa = 0;
 
-	switch (A.Czy_Mozliwe_Bicie_AI(xp, yp, xp, yp))
+	switch (Czy_Mozliwe_Bicie_AI(xp, yp, xp, yp,A))
 	{
 	case 0:
 	{
@@ -340,6 +349,8 @@ void AI::Koncowy_Ruch(Arena &A)
 					TabKoniec[2] = TabBicie[0];
 					TabKoniec[3] = TabBicie[1];
 
+					punkty++; // Na razie bicie ma najwieksza wage wiec zawsze jak tu wejdziemy bedzie cos sie bilo
+
 					//TabBicie[0] = 0;
 					//TabBicie[1] = 0;
 					//TabBicie[2] = 0;
@@ -364,6 +375,62 @@ void AI::Koncowy_Ruch(Arena &A)
 		}
 	}
 
+}
+
+int AI::Czy_Mozliwe_Bicie_AI(int x, int y, int xzabr, int yzabr,Arena &A)
+{
+	int LUp[2] = { -1,-1 };
+	int RUp[2] = { -1,1 };
+	int RDown[2] = { 1,1 };
+	int LDown[2] = { 1,-1 };
+
+
+	if (A.Czy_Jest_W_Arenie(x - 1, y - 1) && x - 1 != 7 && x - 1 != 0 && y - 1 != 7 && y - 1 != 0 && (x - 1 != xzabr || y - 1 != yzabr))
+	{
+		//cout << "Bicie lewo gora" << endl;
+		//cout << x << " " << y << endl;
+		if (A.Bicie(x - 1, y - 1, LUp))
+		{
+			//cout << "Tak1" << endl;
+			//system("pause");
+			return 0;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(x - 1, y + 1) && x - 1 != 7 && x - 1 != 0 && y + 1 != 7 && y + 1 != 0 && (x - 1 != xzabr || y + 1 != yzabr))
+	{
+		//cout << "Bicie prawo gora" << endl;
+		if (A.Bicie(x - 1, y + 1, RUp))
+		{
+			//cout << "Tak2" << endl;
+			//system("pause");
+			return 1;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(x + 1, y + 1) && x + 1 != 7 && x + 1 != 0 && y + 1 != 7 && y + 1 != 0 && (x + 1 != xzabr || y + 1 != yzabr))
+	{
+		//cout << "Bicie prawo dol" << endl;
+		if (A.Bicie(x + 1, y + 1, RDown))
+		{
+			//cout << "Tak3" << endl;
+			//system("pause");
+			return 3;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(x + 1, y - 1) && x + 1 != 7 && x + 1 != 0 && y - 1 != 7 && y - 1 != 0 && (x + 1 != xzabr || y - 1 != yzabr))
+	{
+		//cout << "Bicie lewo dol" << endl;
+		if (A.Bicie(x + 1, y - 1, LDown))
+		{
+			//cout << "Tak4" << endl;
+			//system("pause");
+			return 2;
+		}
+	}
+
+	return -1;
 }
 
 

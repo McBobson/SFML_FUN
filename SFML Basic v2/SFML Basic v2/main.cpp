@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <iostream>
+#include <Windows.h>
 #include "Wyswietlanie.h"
 #include "Arena_SFML.h"
 #include "Nag堯wek.h"
@@ -15,8 +16,24 @@ int ZwrocX(int);
 
 char ZwrocY(int);
 
+void VsAI(sf::SoundBuffer,Ekran&);
+
+void PVP(sf::SoundBuffer, Ekran&);
+
 int main()
 {
+
+	bool menu = false;
+	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
+	Ekran E;
+	E.Tworz_Plansze();
+	E.Ulozenie_Pionkow();
+
+	int wybor = 0;
+
+	////////////////////////// KOMENTARZE NA PROPSIE OBIEKTOWOSC FFF CHUJ ////////////////////////////////////
+
+	/*
 	//Arena2 E;
 	Ekran E;
 	Arena A;
@@ -26,166 +43,273 @@ int main()
 	//cout << A << endl;
 	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
 	int bicie = 0;
+	bool menu = false;
 
-	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
+	//sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
+	//sf::RenderWindow MenuGlowne(sf::VideoMode(800, 800, 32), "Menu_Warcby");
 	E.Tworz_Plansze();
-	E.Ulozenie_Pionkow();
+	E.Ulozenie_Pionkow();*/
 
-	/*
-	for (int i = 0; i < ROZ; i++)
+
+	cout << "WSZYSTKIE GRAFIKI ORAZ UTWORY MUZYCZNE ZOSTAlY UZYTE NIE W CELACH KOMERCYJNYCH TYLKO DO UZYTKU PRYWATNEGO" << endl;
+	cout << "SA ONE ASPEKTEM HUMORYSTYCZNYM ORAZ UROZMAICAJA SZATE AUDIOWIZUALNA PROGRAMU" << endl;
+	Sleep(5000);
+
+	system("cls");
+	cout << "LOADING:__________";
+	//////////////// LADOWANIE SOUNDTRACKU ////////////////////////////////////
+
+	sf::SoundBuffer BuforM,BuforB,BuforB2;
+	if (!BuforM.loadFromFile("Menu.wav"))
 	{
-		for (int j = 0; j < ROZ; j++)
-		{
-			cout << A.znaki[i][j] << " ";
-		}
-		cout << endl;
-	}*/
+		cout << "Nie mozna odtworzyc sciezki dzwiekowej" << endl;
+	}
 
-	while (oknoAplikacji.isOpen())
+	system("cls");
+	cout << "LOADING:[][]_______";
+
+	if (!BuforB.loadFromFile("Battle.wav"))
 	{
-		if (wysw == false)
+		cout << "Nie mozna odtworzyc sciezki dzwiekowej" << endl;
+	}
+	system("cls");
+	cout << "LOADING:[][][][][]____";
+
+	if (!BuforB2.loadFromFile("Battle2.wav"))
+	{
+		cout << "Nie mozna odtworzyc sciezki dzwiekowej" << endl;
+	}
+
+	system("cls");
+	cout << "LOADING:[][][][][][][][]";
+	Sleep(1000);
+	system("cls");
+	cout << "Milej gry :)" << endl;
+	 // Menu GLowne // 
+	if (menu == false)
+	{
+		int xpom, ypom;
+
+		sf::Sound soundm;
+		soundm.setBuffer(BuforM);
+		soundm.setVolume(15);
+		soundm.play();
+
+		sf::RenderWindow MenuGlowne(sf::VideoMode(800, 800, 32), "Menu_Warcby");
+		while (MenuGlowne.isOpen())
 		{
-			system("cls");
-			cout << "TURA GRACZA " << gracz << endl;
-			wysw = true;
-		}
-		//cout << "TURA GRACZA " << gracz << endl;
-		//system("cls");
-		sf::Event zdarzenie;
-
-		while (oknoAplikacji.pollEvent(zdarzenie))
-		{
-			if (zdarzenie.type == sf::Event::Closed)
-				oknoAplikacji.close();
-
-			if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
-				oknoAplikacji.close();
-
-			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
-				oknoAplikacji.close();
-
-			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+			sf::Event zdarzenieM;
+			while (MenuGlowne.pollEvent(zdarzenieM))
 			{
-				//cout << zdarzenie.mouseButton.x << endl;
-				//cout << zdarzenie.mouseButton.y << endl;
-				//cout << ZwrocX(zdarzenie.mouseButton.x) << " "<<ZwrocY(zdarzenie.mouseButton.y)<<endl;
-				x = ZwrocX(zdarzenie.mouseButton.y);
-				y = ZwrocY(zdarzenie.mouseButton.x);
-				Czy_Lewy = true;
+				if (zdarzenieM.type == sf::Event::Closed)
+					MenuGlowne.close();
 
-			}
+				if (zdarzenieM.type == sf::Event::KeyPressed && zdarzenieM.key.code == sf::Keyboard::Escape)
+					MenuGlowne.close();
 
-			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Right)
-			{
-				//cout << zdarzenie.mouseButton.x << endl;
-				//cout << zdarzenie.mouseButton.y << endl;
-				//cout << ZwrocX(zdarzenie.mouseButton.x) << " " << ZwrocY(zdarzenie.mouseButton.y) << endl;
-				xk = ZwrocX(zdarzenie.mouseButton.y);
-				yk = ZwrocY(zdarzenie.mouseButton.x);
+				if (zdarzenieM.type == sf::Event::MouseButtonPressed && zdarzenieM.mouseButton.button == sf::Mouse::Middle)
+					MenuGlowne.close();
 
-				Czy_Prawy = true;
-
-				//A.Przesun_Pionek((int)x - 65, y, (int)xk - 65, yk, gracz, E);
-				//system("pause");
-				//system("cls");
-				//cout << A << endl;
-				//cout << endl;
-
-				/*
-				for (int i = 0; i < ROZ; i++)
+				if (zdarzenieM.type == sf::Event::MouseButtonPressed && zdarzenieM.mouseButton.button == sf::Mouse::Left)
 				{
-					for (int j = 0; j < ROZ; j++)
-					{
-						cout << A.znaki[i][j] << " ";
-					}
-					cout << endl;
-				}*/
 
+					xpom = zdarzenieM.mouseButton.x;
+					ypom = zdarzenieM.mouseButton.y;
 
-			}
+					cout << zdarzenieM.mouseButton.x << endl;
+					cout << zdarzenieM.mouseButton.y<<endl;
+					Czy_Lewy = true;
 
-			if (Czy_Lewy == true && Czy_Prawy == true)
-			{
-				wysw = false;
-				bicie = 0;
-				xp = xk;
-				yp = (int)yk-65;
-				//A.Przesun_Pionek((int)x - 65, y, (int)xk - 65, yk, gracz, E);
-				Czy_Lewy = false;
-				Czy_Prawy = false;
-
-				pom[1] = ((int)yk - 65) - ((int)y - 65);
-				pom[0] = xk - x;
-
-				int wynik = A.Przesun_Pionek(x, (int)y-65, xk, (int)yk-65, gracz, E);
-
-				if (wynik == 1)
-				{
-					bicie++;
-					switch (A.Kierunek_Bicia(pom))
-					{
-					case 0:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
-						pom[0] = xk - x - 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
-
-					case 1:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
-						pom[0] = xk - x - 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
-
-					case 2:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
-						pom[0] = xk - x + 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
-
-					case 3:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
-						pom[0] = xk - x + 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
-					}
-
-					yp = ((int)y - 65) + pom[1];
-					xp = x + pom[0];
-					//cout << xp << " " << yp << endl;
-					//punkty1++;
 				}
 
-				gracz++;
-				AI.Koncowy_Ruch(A);
-				A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz,E);
-				//cout << AI.TabKoniec[0] << " " << AI.TabKoniec[1] << " " << AI.TabKoniec[2] << " " << AI.TabKoniec[3]<<endl;
-				//system("pause");
-				gracz--;
-			/*
-			if (bicie==0 && wynik != -1) // Ruch zwyk造 bez bicia
-			{
-				cout << "TET";
-				if (gracz == 1) gracz++;
-				else gracz--;
+				if (Czy_Lewy == true)
+				{
+					if (xpom < 716 && xpom>468 && ypom < 146 && ypom>40)
+					{
+						wybor = 1;
+						cout << "Bitka na chuje" << endl;
+						menu = true;
+						soundm.stop();
+						MenuGlowne.close();
+					}
+					if (xpom < 727 && xpom>458 && ypom < 357 && ypom>225)
+					{
+						wybor = 2;
+						cout << "Bitka" << endl;
+						menu = true;
+						soundm.stop();
+						MenuGlowne.close();
+					}
+					if (xpom < 728 && xpom>432 && ypom < 721 && ypom>582)
+					{
+						soundm.stop();
+						MenuGlowne.close();
+					}
+					//menu = true;
+					//soundm.stop();
+					//MenuGlowne.close();
+				}
 			}
-			else if ((!A.Czy_Mozliwe_Bicie(yp, xp) || !A.Czy_Mozliwe_Bicie_Damka(yp, xp)) && wynik!=-1) // Czy mozliwe jest dalsze bicie
-			{
-				cout << "LASAGNA" << endl;
-				if (gracz == 1) gracz++;
-				else gracz--;
-			}*/ //potrzebne do wielokrotnego bicia
 
+			MenuGlowne.draw(E.Menu);
+			MenuGlowne.display();
 		}
 	}
-		
+
+	// Bitka // 
+	if (menu == true)
+	{
+		/*
+		sf::Sound sound;
+		sound.setBuffer(BuforB);
+		sound.setVolume(3);
+		sound.play();
+		sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
+		while (oknoAplikacji.isOpen())
+		{
+			if (wysw == false)
+			{
+				system("cls");
+				cout << "TURA GRACZA " << gracz << endl;
+				wysw = true;
+			}
+			//cout << "TURA GRACZA " << gracz << endl;
+			//system("cls");
+			sf::Event zdarzenie;
+
+			while (oknoAplikacji.pollEvent(zdarzenie))
+			{
+				if (zdarzenie.type == sf::Event::Closed)
+					oknoAplikacji.close();
+
+				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+					oknoAplikacji.close();
+
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+					oknoAplikacji.close();
+
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+				{
+					//cout << zdarzenie.mouseButton.x << endl;
+					//cout << zdarzenie.mouseButton.y << endl;
+					//cout << ZwrocX(zdarzenie.mouseButton.x) << " "<<ZwrocY(zdarzenie.mouseButton.y)<<endl;
+					x = ZwrocX(zdarzenie.mouseButton.y);
+					y = ZwrocY(zdarzenie.mouseButton.x);
+					Czy_Lewy = true;
+
+				}
+
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Right)
+				{
+					//cout << zdarzenie.mouseButton.x << endl;
+					//cout << zdarzenie.mouseButton.y << endl;
+					//cout << ZwrocX(zdarzenie.mouseButton.x) << " " << ZwrocY(zdarzenie.mouseButton.y) << endl;
+					xk = ZwrocX(zdarzenie.mouseButton.y);
+					yk = ZwrocY(zdarzenie.mouseButton.x);
+
+					Czy_Prawy = true;
+
+					//A.Przesun_Pionek((int)x - 65, y, (int)xk - 65, yk, gracz, E);
+					//system("pause");
+					//system("cls");
+					//cout << A << endl;
+					//cout << endl;
+
+					/*
+					for (int i = 0; i < ROZ; i++)
+					{
+						for (int j = 0; j < ROZ; j++)
+						{
+							cout << A.znaki[i][j] << " ";
+						}
+						cout << endl;
+					}
+
+
+				}
+
+				if (Czy_Lewy == true && Czy_Prawy == true)
+				{
+					wysw = false;
+					bicie = 0;
+					xp = xk;
+					yp = (int)yk - 65;
+					//A.Przesun_Pionek((int)x - 65, y, (int)xk - 65, yk, gracz, E);
+					Czy_Lewy = false;
+					Czy_Prawy = false;
+
+					pom[1] = ((int)yk - 65) - ((int)y - 65);
+					pom[0] = xk - x;
+
+					int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+
+					if (wynik == 1)
+					{
+						bicie++;
+						switch (A.Kierunek_Bicia(pom))
+						{
+						case 0:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+							pom[0] = xk - x - 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
+
+						case 1:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+							pom[0] = xk - x - 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
+
+						case 2:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+							pom[0] = xk - x + 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
+
+						case 3:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+							pom[0] = xk - x + 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
+						}
+
+						yp = ((int)y - 65) + pom[1];
+						xp = x + pom[0];
+						//cout << xp << " " << yp << endl;
+						//punkty1++;
+					}
+
+					gracz++;
+					AI.Koncowy_Ruch(A);
+					A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
+					//cout << AI.TabKoniec[0] << " " << AI.TabKoniec[1] << " " << AI.TabKoniec[2] << " " << AI.TabKoniec[3]<<endl;
+					//system("pause");
+					gracz--;
+					
+					if (bicie==0 && wynik != -1) // Ruch zwyk造 bez bicia
+					{
+						cout << "TET";
+						if (gracz == 1) gracz++;
+						else gracz--;
+					}
+					else if ((!A.Czy_Mozliwe_Bicie(yp, xp) || !A.Czy_Mozliwe_Bicie_Damka(yp, xp)) && wynik!=-1) // Czy mozliwe jest dalsze bicie
+					{
+						cout << "LASAGNA" << endl;
+						if (gracz == 1) gracz++;
+						else gracz--;
+					} //potrzebne do wielokrotnego bicia
+
+				}
+			}
+
 			//oknoAplikacji.clear(sf::Color(255, 155, 50));
 			oknoAplikacji.draw(E.Sprite);
 			oknoAplikacji.draw(E.P1);
@@ -213,15 +337,24 @@ int main()
 			oknoAplikacji.draw(E.Pc10);
 			oknoAplikacji.draw(E.Pc11);
 			oknoAplikacji.draw(E.Pc12);
-		
-		// TUTAJ BEDZIE IMBA
 
 
-		oknoAplikacji.display();
+			oknoAplikacji.display();
 
-		
+
+		}*/
+
+		if (wybor == 1)
+		{
+			PVP(BuforB2, E);
+		}
+
+		else if (wybor == 2)
+		{
+			VsAI(BuforB, E);
+		}
 	}
-
+	
 	
 
 	return 0;
@@ -265,4 +398,391 @@ int ZwrocX(int x)
 	else if (x > 555 && x < 633) return 6;
 
 	else if (x > 633 && x < 710) return 7;
+}
+
+void VsAI(sf::SoundBuffer BuforB,Ekran& E)
+{
+	//Arena2 E;
+	//Ekran E;
+	Arena A;
+	AI AI;
+	int x, y, gracz = 1, xk, yk, xp, yp;
+	int pom[2];
+	//cout << A << endl;
+	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
+	int bicie = 0;
+	bool menu = false;
+	int punkty=0;
+
+	//E.Tworz_Plansze();
+	//E.Ulozenie_Pionkow();
+
+	sf::Sound sound;
+	sound.setBuffer(BuforB);
+	sound.setVolume(5);
+	sound.play();
+	sound.setLoop(true);
+	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
+	while (oknoAplikacji.isOpen())
+	{
+		if (wysw == false)
+		{
+			system("cls");
+			cout << "TURA GRACZA " << gracz << endl;
+			wysw = true;
+		}
+	
+		sf::Event zdarzenie;
+
+		while (oknoAplikacji.pollEvent(zdarzenie))
+		{
+			if (zdarzenie.type == sf::Event::Closed)
+				oknoAplikacji.close();
+
+			if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+				oknoAplikacji.close();
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+				oknoAplikacji.close();
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+			{
+				x = ZwrocX(zdarzenie.mouseButton.y);
+				y = ZwrocY(zdarzenie.mouseButton.x);
+				Czy_Lewy = true;
+
+			}
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Right)
+			{
+				xk = ZwrocX(zdarzenie.mouseButton.y);
+				yk = ZwrocY(zdarzenie.mouseButton.x);
+
+				Czy_Prawy = true;
+
+
+			}
+
+			if (Czy_Lewy == true && Czy_Prawy == true)
+			{
+				wysw = false;
+				bicie = 0;
+				xp = xk;
+				yp = (int)yk - 65;
+				//A.Przesun_Pionek((int)x - 65, y, (int)xk - 65, yk, gracz, E);
+				Czy_Lewy = false;
+				Czy_Prawy = false;
+
+				pom[1] = ((int)yk - 65) - ((int)y - 65);
+				pom[0] = xk - x;
+
+				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+
+				if (wynik == 1)
+				{
+					bicie++;
+					punkty++;
+					switch (A.Kierunek_Bicia(pom))
+					{
+					case 0:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x - 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+
+					case 1:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x - 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+
+					case 2:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x + 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+
+					case 3:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x + 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+					}
+
+					yp = ((int)y - 65) + pom[1];
+					xp = x + pom[0];
+					//cout << xp << " " << yp << endl;
+					//punkty1++;
+				}
+
+				if (punkty == 12)
+				{
+					oknoAplikacji.close();
+					break;
+				}
+
+				gracz++;
+				/*
+				int Wektor_Przesuneicia[2]; // Zal嘀ek wielokrotnego bicia
+				do
+				{
+					AI.Koncowy_Ruch(A);
+					A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
+
+					Wektor_Przesuneicia[0] = AI.TabKoniec[2] - AI.TabKoniec[0];
+					Wektor_Przesuneicia[1] = AI.TabKoniec[3] - AI.TabKoniec[1];
+				} while (A.Czy_Mozliwe_Bicie(AI.TabKoniec[2]+Wektor_Przesuneicia[0],AI.TabKoniec[3]+Wektor_Przesuneicia[1]));
+				*/
+
+				AI.Koncowy_Ruch(A);
+				A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
+				gracz--;
+
+				if (AI.Zwroc_Punkty() == 12)
+				{
+					oknoAplikacji.close();
+					break;
+				}
+
+				/*
+				if (bicie==0 && wynik != -1) // Ruch zwyk造 bez bicia
+				{
+					cout << "TET";
+					if (gracz == 1) gracz++;
+					else gracz--;
+				}
+				else if ((!A.Czy_Mozliwe_Bicie(yp, xp) || !A.Czy_Mozliwe_Bicie_Damka(yp, xp)) && wynik!=-1) // Czy mozliwe jest dalsze bicie
+				{
+					cout << "LASAGNA" << endl;
+					if (gracz == 1) gracz++;
+					else gracz--;
+				}*/ //potrzebne do wielokrotnego bicia
+
+			}
+		}
+
+		//oknoAplikacji.clear(sf::Color(255, 155, 50));
+		oknoAplikacji.draw(E.Sprite);
+		oknoAplikacji.draw(E.P1);
+		oknoAplikacji.draw(E.P2);
+		oknoAplikacji.draw(E.P3);
+		oknoAplikacji.draw(E.P4);
+		oknoAplikacji.draw(E.P5);
+		oknoAplikacji.draw(E.P6);
+		oknoAplikacji.draw(E.P7);
+		oknoAplikacji.draw(E.P8);
+		oknoAplikacji.draw(E.P9);
+		oknoAplikacji.draw(E.P10);
+		oknoAplikacji.draw(E.P11);
+		oknoAplikacji.draw(E.P12);
+
+		oknoAplikacji.draw(E.Pc1);
+		oknoAplikacji.draw(E.Pc2);
+		oknoAplikacji.draw(E.Pc3);
+		oknoAplikacji.draw(E.Pc4);
+		oknoAplikacji.draw(E.Pc5);
+		oknoAplikacji.draw(E.Pc6);
+		oknoAplikacji.draw(E.Pc7);
+		oknoAplikacji.draw(E.Pc8);
+		oknoAplikacji.draw(E.Pc9);
+		oknoAplikacji.draw(E.Pc10);
+		oknoAplikacji.draw(E.Pc11);
+		oknoAplikacji.draw(E.Pc12);
+
+
+		oknoAplikacji.display();
+
+
+
+	}
+
+}
+
+void PVP(sf::SoundBuffer BuforB2, Ekran& E)
+{
+	Arena A;
+	AI AI;
+	int x, y, gracz = 1, xk, yk, xp, yp;
+	int pom[2];
+	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
+	int bicie = 0;
+	bool menu = false;
+	int punkty1=0, punkty2=0;
+
+
+	sf::Sound sound;
+	sound.setBuffer(BuforB2);
+	sound.setVolume(5);
+	sound.play();
+	sound.setLoop(true);
+	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
+	while (oknoAplikacji.isOpen())
+	{
+		if (wysw == false)
+		{
+			system("cls");
+			cout << "TURA GRACZA " << gracz << endl;
+			wysw = true;
+		}
+	
+		sf::Event zdarzenie;
+		int pomgracz = gracz;
+
+		while (oknoAplikacji.pollEvent(zdarzenie))
+		{
+			if (zdarzenie.type == sf::Event::Closed)
+				oknoAplikacji.close();
+
+			if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+				oknoAplikacji.close();
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+				oknoAplikacji.close();
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+			{
+				x = ZwrocX(zdarzenie.mouseButton.y);
+				y = ZwrocY(zdarzenie.mouseButton.x);
+				Czy_Lewy = true;
+
+			}
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Right)
+			{
+				xk = ZwrocX(zdarzenie.mouseButton.y);
+				yk = ZwrocY(zdarzenie.mouseButton.x);
+
+				Czy_Prawy = true;
+			}
+
+			if (Czy_Lewy == true && Czy_Prawy == true)
+			{
+				wysw = false;
+				bicie = 0;
+				xp = xk;
+				yp = (int)yk - 65;
+				Czy_Lewy = false;
+				Czy_Prawy = false;
+
+				pom[1] = ((int)yk - 65) - ((int)y - 65);
+				pom[0] = xk - x;
+
+				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+				pomgracz = gracz;
+
+				if (wynik == 1)
+				{
+					bicie++;
+
+					if (gracz == 1) punkty1++;
+					else punkty2++;
+				
+					switch (A.Kierunek_Bicia(pom))
+					{
+					case 0:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x - 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+
+					case 1:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x - 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+
+					case 2:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x + 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+
+					case 3:
+					{
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x + 1;
+						//cout<<pom[0]<<" "<<pom[1]<<endl;
+					}
+					break;
+					}
+
+					yp = ((int)y - 65) + pom[1];
+					xp = x + pom[0];
+					//cout << xp << " " << yp << endl;
+					//punkty1++;
+				}
+
+				pomgracz = gracz;
+				if (punkty1 == 12 || punkty2 == 12)
+				{
+					//cout << "Koniec gry, wygral gracz" << gracz << endl;
+					//system("pause");
+					oknoAplikacji.close();
+					break;
+				}
+
+				//Zmiana gracza
+
+				if (bicie == 0 && wynik != -1) // Ruch zwyk造 bez bicia
+				{
+					if (gracz == 1) gracz++;
+					else gracz--;
+				}
+				else if ((!A.Czy_Mozliwe_Bicie(xp, yp) || !A.Czy_Mozliwe_Bicie_Damka(xp, yp)) && wynik != -1) // Czy mozliwe jest dalsze bicie
+				{
+					if (gracz == 1) gracz++;
+					else gracz--;
+
+				}
+			
+
+			}
+		}
+
+		//oknoAplikacji.clear(sf::Color(255, 155, 50));
+		oknoAplikacji.draw(E.Sprite);
+		oknoAplikacji.draw(E.P1);
+		oknoAplikacji.draw(E.P2);
+		oknoAplikacji.draw(E.P3);
+		oknoAplikacji.draw(E.P4);
+		oknoAplikacji.draw(E.P5);
+		oknoAplikacji.draw(E.P6);
+		oknoAplikacji.draw(E.P7);
+		oknoAplikacji.draw(E.P8);
+		oknoAplikacji.draw(E.P9);
+		oknoAplikacji.draw(E.P10);
+		oknoAplikacji.draw(E.P11);
+		oknoAplikacji.draw(E.P12);
+
+		oknoAplikacji.draw(E.Pc1);
+		oknoAplikacji.draw(E.Pc2);
+		oknoAplikacji.draw(E.Pc3);
+		oknoAplikacji.draw(E.Pc4);
+		oknoAplikacji.draw(E.Pc5);
+		oknoAplikacji.draw(E.Pc6);
+		oknoAplikacji.draw(E.Pc7);
+		oknoAplikacji.draw(E.Pc8);
+		oknoAplikacji.draw(E.Pc9);
+		oknoAplikacji.draw(E.Pc10);
+		oknoAplikacji.draw(E.Pc11);
+		oknoAplikacji.draw(E.Pc12);
+
+
+		oknoAplikacji.display();
+
+	}
 }
