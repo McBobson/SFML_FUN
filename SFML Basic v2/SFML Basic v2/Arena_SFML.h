@@ -463,7 +463,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << x << " " << y << endl;
 		if (Bicie(x - 1, y - 1, LUp))
 		{
-			//cout << "Tak1" << endl;
+			cout << "Tak1" << endl;
 			return true;
 		}
 	}
@@ -473,7 +473,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << "Bicie prawo gora" << endl;
 		if (Bicie(x - 1, y + 1, RUp))
 		{
-			//cout << "Tak2" << endl;
+			cout << "Tak2" << endl;
 			return true;
 		}
 	}
@@ -483,7 +483,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << "Bicie prawo dol" << endl;
 		if (Bicie(x + 1, y + 1, RDown))
 		{
-			//cout << "Tak3" << endl;
+			cout << "Tak3" << endl;
 			return true;
 		}
 	}
@@ -493,7 +493,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << "Bicie lewo dol" << endl;
 		if (Bicie(x + 1, y - 1, LDown))
 		{
-			//cout << "Tak4" << endl;
+			cout << "Tak4" << endl;
 			return true;
 		}
 	}

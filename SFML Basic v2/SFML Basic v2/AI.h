@@ -11,6 +11,9 @@ class AI
 	int pom[2], bicia;
 	int TabRuch[3], TabBicie[3];
 	int punkty = 0;
+	int PozycjaTymczasowa[2];
+	bool Atak = false;
+	int WzorzecWag[ROZ][ROZ];
 	//int tablicaWagRuchow[ROZ][ROZ]; 
 
 public:
@@ -54,6 +57,14 @@ public:
 			TabKoniec[i] = 0;
 		}
 		TabKoniec[3] = 0;
+
+		for (int i = 0; i < ROZ; i++)
+		{
+			for (int j = 0; j < ROZ; j++)
+			{
+				WzorzecWag[i][j] = tablicaWagRuchow[i][j];
+			}
+		}
 	}
 
 	int Zwroc_Punkty()
@@ -68,6 +79,10 @@ public:
 	int Mozliwe_Bicie_AI(int, int, Arena&);
 
 	int Czy_Mozliwe_Bicie_AI(int, int, int, int, Arena&);
+
+	void Czy_Pod_Atakiem(int, int, Arena&);
+
+	void Nie_Podkladaj_Sie(int, int, Arena&);
 
 	void Koncowy_Ruch(Arena&);
 
@@ -244,7 +259,7 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A)
 	{
 		//cout << "Tak3" << endl;
 		//system("pause");
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp - 1;
 		TabBicie[1] = yp - 1;
 		TabBicie[2] = wagakoncowa;
@@ -255,7 +270,7 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A)
 	{
 		//cout << "Tak3" << endl;
 		//system("pause");
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp - 1;
 		TabBicie[1] = yp + 1;
 		TabBicie[2] = wagakoncowa;
@@ -266,7 +281,7 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A)
 	{
 		//cout << "Tak3" << endl;
 		//system("pause");
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp + 1;
 		TabBicie[1] = yp - 1;
 		TabBicie[2] = wagakoncowa;
@@ -277,7 +292,7 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A)
 	{
 		//cout << "Tak3" << endl;
 		//system("pause");
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp + 1;
 		TabBicie[1] = yp + 1;
 		TabBicie[2] = wagakoncowa;
@@ -302,41 +317,25 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A)
 void AI::Koncowy_Ruch(Arena &A)
 {
 	waga = 0;
-	for (int i = 0; i < ROZ; i++)
+	for (int i = ROZ-1; i >= 0; i--)
 	{
-		for (int j = 0; j < ROZ; j++)
+		for (int j = ROZ-1; j >= 0; j--)
 		{
 			if (A.tablica[i][j] == 'x')
 			{
+				Nie_Podkladaj_Sie(i, j, A);
+				Czy_Pod_Atakiem(i, j, A);
+				
+
 				//int radom = rand() % 10 + 1;
 				if (waga < Mozliwy_Ruch_AI(i, j, A)) // || (waga==Mozliwy_Ruch_AI(i,j,A) && radom<5)
 				{
-					//cout << "KORONA KIELCE GOWNO WIDELCE" << endl;
 					waga = TabRuch[2];
-					//Wynik.push_back(i);
-					//Wynik.push_back(j);
-					//Wynik.push_back(Mozliwy_Ruch_AI(i, j, A)[0]);
-					//Wynik.push_back(Mozliwy_Ruch_AI(i, j, A)[1]);
 					TabKoniec[0] = i;
 					TabKoniec[1] = j;
 					TabKoniec[2] = TabRuch[0];
 					TabKoniec[3] = TabRuch[1];
-
-					//TabRuch[0] = 0;
-					//TabRuch[1] = 0;
-					//TabRuch[2] = 0;
 				}
-
-				// Czy jest bicie i jego waga
-
-				//cout << "SPRAWDZANIE WAG PRZED IFEM" << endl;
-				//cout << Mozliwe_Bicie_AI(i,j,A) << endl;
-				//system("pause");
-
-				//cout << "WAGA AKTUALNA" << endl;
-				//cout << waga << endl;
-				//system("pause");
-
 
 				if (waga < Mozliwe_Bicie_AI(i, j, A))
 				{
@@ -351,18 +350,8 @@ void AI::Koncowy_Ruch(Arena &A)
 
 					punkty++; // Na razie bicie ma najwieksza wage wiec zawsze jak tu wejdziemy bedzie cos sie bilo
 
-					//TabBicie[0] = 0;
-					//TabBicie[1] = 0;
-					//TabBicie[2] = 0;
-
-					//cout << TabKoniec[0] << " " << TabKoniec[1] << endl;
-					//cout << TabKoniec[2] << " " << TabKoniec[3] << endl;
-					//system("pause");
 				}
 
-
-				//cout << waga << endl;
-				//system("pause");
 			}
 
 			TabRuch[0] = 0;
@@ -372,8 +361,22 @@ void AI::Koncowy_Ruch(Arena &A)
 			TabBicie[0] = 0;
 			TabBicie[1] = 0;
 			TabBicie[2] = 0;
+
 		}
 	}
+
+	
+	for (int i = 0; i < ROZ; i++)
+	{
+		for (int j = 0; j < ROZ; j++)
+		{
+			//cout << tablicaWagRuchow[i][j] << " ";
+			tablicaWagRuchow[i][j] = WzorzecWag[i][j];
+			//cout << tablicaWagRuchow[i][j] << " ";
+		}
+		//cout << endl;
+	}
+	//system("pause");
 
 }
 
@@ -431,6 +434,76 @@ int AI::Czy_Mozliwe_Bicie_AI(int x, int y, int xzabr, int yzabr,Arena &A)
 	}
 
 	return -1;
+}
+
+void AI::Czy_Pod_Atakiem(int xp, int yp, Arena &A)
+{
+	Atak = false;
+
+	if (A.Czy_Jest_W_Arenie(xp + 1, yp + 1) && xp != 7 && xp != 0 && yp != 7 && yp != 0)
+	{
+		if ((A.tablica[xp + 1][yp + 1] == 'o' || A.tablica[xp + 1][yp + 1] == 'O') && !A.Czy_Jest_Pionek(xp - 1, yp - 1))
+		{
+			//cout << "ATAKUJO" << endl;
+			//system("pause");
+			tablicaWagRuchow[xp - 1][yp - 1] += 50;
+			Atak = true;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1, yp - 1) && xp != 7 && xp != 0 && yp != 7 && yp != 0)
+	{
+		if ((A.tablica[xp + 1][yp - 1] == 'o' || A.tablica[xp + 1][yp - 1] == 'O') && !A.Czy_Jest_Pionek(xp - 1, yp + 1))
+		{
+			//cout << "ATAKUJO2" << endl;
+			//system("pause");
+			tablicaWagRuchow[xp - 1][yp + 1] += 50;
+			Atak = true;
+		}
+	}
+}
+
+void AI::Nie_Podkladaj_Sie(int xp, int yp, Arena &A)
+{
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp + 1 + 1))
+	{
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp + 1 + 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp],A.tablica[xp+1+1][yp+1+1]))
+		{
+			tablicaWagRuchow[xp + 1][yp + 1] = 1;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp + 1 - 1))
+	{
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp + 1 - 1) && !A.Czy_Jest_W_Arenie(xp + 1 - 1, yp + 1 + 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp + 1 - 1]))
+		{
+			if (!A.Czy_Jest_Pionek(xp + 1 - 1, yp + 1 + 1))
+			{
+				tablicaWagRuchow[xp + 1][yp + 1] = 1;
+			}
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp - 1 - 1))
+	{
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp - 1 - 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp - 1 - 1]))
+		{
+			tablicaWagRuchow[xp + 1][yp - 1] = 1;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp - 1 + 1))
+	{
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp - 1 + 1) && !A.Czy_Jest_W_Arenie(xp + 1 - 1, yp - 1 - 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp - 1 + 1]))
+		{
+			if (!A.Czy_Jest_Pionek(xp + 1 - 1, yp - 1 - 1))
+			{
+				tablicaWagRuchow[xp + 1][yp - 1] = 1;
+			}
+		}
+	}
+
+
 }
 
 

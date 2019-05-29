@@ -50,7 +50,7 @@ int main()
 	E.Tworz_Plansze();
 	E.Ulozenie_Pionkow();*/
 
-
+	
 	cout << "WSZYSTKIE GRAFIKI ORAZ UTWORY MUZYCZNE ZOSTAlY UZYTE NIE W CELACH KOMERCYJNYCH TYLKO DO UZYTKU PRYWATNEGO" << endl;
 	cout << "SA ONE ASPEKTEM HUMORYSTYCZNYM ORAZ UROZMAICAJA SZATE AUDIOWIZUALNA PROGRAMU" << endl;
 	Sleep(5000);
@@ -60,6 +60,7 @@ int main()
 	//////////////// LADOWANIE SOUNDTRACKU ////////////////////////////////////
 
 	sf::SoundBuffer BuforM,BuforB,BuforB2;
+	/*
 	if (!BuforM.loadFromFile("Menu.wav"))
 	{
 		cout << "Nie mozna odtworzyc sciezki dzwiekowej" << endl;
@@ -85,6 +86,7 @@ int main()
 	Sleep(1000);
 	system("cls");
 	cout << "Milej gry :)" << endl;
+	*/
 	 // Menu GLowne // 
 	if (menu == false)
 	{
@@ -476,52 +478,53 @@ void VsAI(sf::SoundBuffer BuforB,Ekran& E)
 				pom[1] = ((int)yk - 65) - ((int)y - 65);
 				pom[0] = xk - x;
 
-				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+				
+					int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
 
-				if (wynik == 1)
-				{
-					bicie++;
-					punkty++;
-					switch (A.Kierunek_Bicia(pom))
+					if (wynik == 1)
 					{
-					case 0:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
-						pom[0] = xk - x - 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
+						bicie++;
+						punkty++;
+						switch (A.Kierunek_Bicia(pom))
+						{
+						case 0:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+							pom[0] = xk - x - 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
 
-					case 1:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
-						pom[0] = xk - x - 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
+						case 1:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+							pom[0] = xk - x - 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
 
-					case 2:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
-						pom[0] = xk - x + 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
+						case 2:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+							pom[0] = xk - x + 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
 
-					case 3:
-					{
-						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
-						pom[0] = xk - x + 1;
-						//cout<<pom[0]<<" "<<pom[1]<<endl;
-					}
-					break;
-					}
+						case 3:
+						{
+							pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+							pom[0] = xk - x + 1;
+							//cout<<pom[0]<<" "<<pom[1]<<endl;
+						}
+						break;
+						}
 
-					yp = ((int)y - 65) + pom[1];
-					xp = x + pom[0];
-					//cout << xp << " " << yp << endl;
-					//punkty1++;
-				}
+						yp = ((int)y - 65) + pom[1];
+						xp = x + pom[0];
+						//cout << xp << " " << yp << endl;
+						//punkty1++;
+					}
 
 				if (punkty == 12)
 				{
@@ -530,20 +533,30 @@ void VsAI(sf::SoundBuffer BuforB,Ekran& E)
 				}
 
 				gracz++;
-				/*
+
+				int zbity = 0;
 				int Wektor_Przesuneicia[2]; // Zal¹¿ek wielokrotnego bicia
 				do
 				{
+					int punktypoprz=AI.Zwroc_Punkty();
+
 					AI.Koncowy_Ruch(A);
 					A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
 
+					if (AI.Zwroc_Punkty() - punktypoprz == 1)
+						zbity++;
+					else break;
+
 					Wektor_Przesuneicia[0] = AI.TabKoniec[2] - AI.TabKoniec[0];
 					Wektor_Przesuneicia[1] = AI.TabKoniec[3] - AI.TabKoniec[1];
-				} while (A.Czy_Mozliwe_Bicie(AI.TabKoniec[2]+Wektor_Przesuneicia[0],AI.TabKoniec[3]+Wektor_Przesuneicia[1]));
-				*/
 
-				AI.Koncowy_Ruch(A);
-				A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
+					//cout << Wektor_Przesuneicia[0] << " " << Wektor_Przesuneicia[1] << endl;
+					//Sleep(1000);
+				} while (zbity>0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[2]+Wektor_Przesuneicia[0],AI.TabKoniec[3]+Wektor_Przesuneicia[1]));
+				
+
+				//AI.Koncowy_Ruch(A);
+				//A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
 				gracz--;
 
 				if (AI.Zwroc_Punkty() == 12)

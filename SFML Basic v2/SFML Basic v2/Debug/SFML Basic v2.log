@@ -96,6 +96,6 @@ f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1375): warning C4305: "argument
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1378): warning C4305: "argument": obcięcie z "double" do "float"
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1381): warning C4305: "argument": obcięcie z "double" do "float"
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(762): warning C4715: "Arena2::Przesun_Pionek”: niewszystkie ścieżki kodu zwracają wartość
-f:\sfml\sfml basic v2\sfml basic v2\main.cpp(382): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
-f:\sfml\sfml basic v2\sfml basic v2\main.cpp(401): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
+f:\sfml\sfml basic v2\sfml basic v2\main.cpp(384): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
+f:\sfml\sfml basic v2\sfml basic v2\main.cpp(403): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
   SFML Basic v2.vcxproj -> F:\sfml\SFML Basic v2\Debug\SFML Basic v2.exe
