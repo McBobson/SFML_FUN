@@ -57,6 +57,7 @@ int main()
 
 	system("cls");
 	cout << "LOADING:__________";
+
 	//////////////// LADOWANIE SOUNDTRACKU ////////////////////////////////////
 
 	sf::SoundBuffer BuforM,BuforB,BuforB2;
@@ -479,13 +480,13 @@ void VsAI(sf::SoundBuffer BuforB,Ekran& E)
 				pom[0] = xk - x;
 
 				
-					int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
-
-					if (wynik == 1)
-					{
-						bicie++;
-						punkty++;
-						switch (A.Kierunek_Bicia(pom))
+				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+				
+				if (wynik == 1)
+				{
+					bicie++;
+					punkty++;
+					switch (A.Kierunek_Bicia(pom))
 						{
 						case 0:
 						{
@@ -519,50 +520,53 @@ void VsAI(sf::SoundBuffer BuforB,Ekran& E)
 						}
 						break;
 						}
-
-						yp = ((int)y - 65) + pom[1];
-						xp = x + pom[0];
-						//cout << xp << " " << yp << endl;
-						//punkty1++;
-					}
-
-				if (punkty == 12)
-				{
-					oknoAplikacji.close();
-					break;
+						
+					yp = ((int)y - 65) + pom[1];
+					xp = x + pom[0];
+					//cout << xp << " " << yp << endl;
+					//punkty1++;
 				}
 
-				gracz++;
-
-				int zbity = 0;
-				int Wektor_Przesuneicia[2]; // Zal¹¿ek wielokrotnego bicia
-				do
+				if (bicie == 0 || (bicie > 0 && !A.Czy_Mozliwe_Bicie(xp, yp)))
 				{
-					int punktypoprz=AI.Zwroc_Punkty();
+					if (punkty == 12)
+					{
+						oknoAplikacji.close();
+						break;
+					}
 
-					AI.Koncowy_Ruch(A);
-					A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
+					gracz++;
 
-					if (AI.Zwroc_Punkty() - punktypoprz == 1)
-						zbity++;
-					else break;
+					int zbity = 0;
+					int Wektor_Przesuneicia[2]; // Zal¹¿ek wielokrotnego bicia
+					do
+					{
+						int punktypoprz = AI.Zwroc_Punkty();
 
-					Wektor_Przesuneicia[0] = AI.TabKoniec[2] - AI.TabKoniec[0];
-					Wektor_Przesuneicia[1] = AI.TabKoniec[3] - AI.TabKoniec[1];
+						AI.Koncowy_Ruch(A);
+						A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
 
-					//cout << Wektor_Przesuneicia[0] << " " << Wektor_Przesuneicia[1] << endl;
-					//Sleep(1000);
-				} while (zbity>0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[2]+Wektor_Przesuneicia[0],AI.TabKoniec[3]+Wektor_Przesuneicia[1]));
-				
+						if (AI.Zwroc_Punkty() - punktypoprz == 1)
+							zbity++;
+						else break;
 
-				//AI.Koncowy_Ruch(A);
-				//A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
-				gracz--;
+						Wektor_Przesuneicia[0] = AI.TabKoniec[2] - AI.TabKoniec[0];
+						Wektor_Przesuneicia[1] = AI.TabKoniec[3] - AI.TabKoniec[1];
 
-				if (AI.Zwroc_Punkty() == 12)
-				{
-					oknoAplikacji.close();
-					break;
+						//cout << Wektor_Przesuneicia[0] << " " << Wektor_Przesuneicia[1] << endl;
+						//Sleep(1000);
+					} while (zbity > 0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[2] + Wektor_Przesuneicia[0], AI.TabKoniec[3] + Wektor_Przesuneicia[1]));
+
+
+					//AI.Koncowy_Ruch(A);
+					//A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
+					gracz--;
+
+					if (AI.Zwroc_Punkty() == 12)
+					{
+						oknoAplikacji.close();
+						break;
+					}
 				}
 
 				/*

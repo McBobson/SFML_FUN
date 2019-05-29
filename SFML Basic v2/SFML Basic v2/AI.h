@@ -9,7 +9,7 @@ using namespace std;
 class AI
 {
 	int pom[2], bicia;
-	int TabRuch[3], TabBicie[3];
+	int TabRuch[3], TabBicie[3], TabBicieD[3];
 	int punkty = 0;
 	int PozycjaTymczasowa[2];
 	bool Atak = false;
@@ -80,6 +80,8 @@ public:
 
 	int Czy_Mozliwe_Bicie_AI(int, int, int, int, Arena&);
 
+	int Mozliwe_Bicie_AI_Damka(int, int, Arena&);
+
 	void Czy_Pod_Atakiem(int, int, Arena&);
 
 	void Nie_Podkladaj_Sie(int, int, Arena&);
@@ -105,26 +107,26 @@ int AI::Ilosc_Bic(int xp, int yp, Arena &A)
 
 		if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 0)
 		{
-			cout << "lg";
+			//cout << "lg";
 			xk = xp - 1;
 			yk = yp - 1;
 
 		}
 		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 1)
 		{
-			cout << "pg";
+			//cout << "pg";
 			xk = xp + 1;
 			yk = yp - 1;
 		}
 		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 2)
 		{
-			cout << "ld";
+			//cout << "ld";
 			xk = xp - 1;
 			yk = yp + 1;
 		}
 		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 3)
 		{
-			cout << "pd";
+			//cout << "pd";
 			xk = xp + 1;
 			yk = yp + 1;
 		}
@@ -354,6 +356,23 @@ void AI::Koncowy_Ruch(Arena &A)
 
 			}
 
+			/*if (A.tablica[i][j] == 'X')
+			{
+				if (waga < Mozliwe_Bicie_AI_Damka(i, j, A))
+				{
+					cout << "Waga damki" << endl;
+					system("pause");
+					waga = TabBicie[2];
+					TabKoniec[0] = i;
+					TabKoniec[1] = j;
+					TabKoniec[2] = TabBicieD[0];
+					TabKoniec[3] = TabBicieD[1];
+
+					punkty++; // Na razie bicie ma najwieksza wage wiec zawsze jak tu wejdziemy bedzie cos sie bilo
+
+				}
+			}*/
+
 			TabRuch[0] = 0;
 			TabRuch[1] = 0;
 			TabRuch[2] = 0;
@@ -475,7 +494,7 @@ void AI::Nie_Podkladaj_Sie(int xp, int yp, Arena &A)
 
 	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp + 1 - 1))
 	{
-		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp + 1 - 1) && !A.Czy_Jest_W_Arenie(xp + 1 - 1, yp + 1 + 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp + 1 - 1]))
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp + 1 - 1) && A.Czy_Jest_W_Arenie(xp + 1 - 1, yp + 1 + 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp + 1 - 1]))
 		{
 			if (!A.Czy_Jest_Pionek(xp + 1 - 1, yp + 1 + 1))
 			{
@@ -494,7 +513,7 @@ void AI::Nie_Podkladaj_Sie(int xp, int yp, Arena &A)
 
 	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp - 1 + 1))
 	{
-		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp - 1 + 1) && !A.Czy_Jest_W_Arenie(xp + 1 - 1, yp - 1 - 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp - 1 + 1]))
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp - 1 + 1) && A.Czy_Jest_W_Arenie(xp + 1 - 1, yp - 1 - 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp - 1 + 1]))
 		{
 			if (!A.Czy_Jest_Pionek(xp + 1 - 1, yp - 1 - 1))
 			{
@@ -504,6 +523,96 @@ void AI::Nie_Podkladaj_Sie(int xp, int yp, Arena &A)
 	}
 
 
+}
+
+int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
+{
+	int wagakoncowa = 0;
+
+	if (A.tablica[xp][yp] == 'X')
+	{
+		cout << A.licznik << endl;
+		//system("pause");
+		switch (A.Czy_Mozliwe_Bicie_Damka(xp, yp))
+		{
+		case 1:
+		{
+			cout << "1" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp -= 1;
+				yp -= 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case 2:
+		{
+			cout << "2" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp -= 1;
+				yp += 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case 3:
+		{
+			cout << "3" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp += 1;
+				yp += 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case 4:
+		{
+			cout << "4" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp += 1;
+				yp -= 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case -1:
+		{
+			wagakoncowa = -1;
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+		}
+	}
+
+	return wagakoncowa;
 }
 
 
