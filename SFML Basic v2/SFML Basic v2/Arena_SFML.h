@@ -464,7 +464,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << x << " " << y << endl;
 		if (Bicie(x - 1, y - 1, LUp))
 		{
-			cout << "Tak1" << endl;
+			//cout << "Tak1" << endl;
 			return true;
 		}
 	}
@@ -474,7 +474,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << "Bicie prawo gora" << endl;
 		if (Bicie(x - 1, y + 1, RUp))
 		{
-			cout << "Tak2" << endl;
+			//cout << "Tak2" << endl;
 			return true;
 		}
 	}
@@ -484,7 +484,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << "Bicie prawo dol" << endl;
 		if (Bicie(x + 1, y + 1, RDown))
 		{
-			cout << "Tak3" << endl;
+			//cout << "Tak3" << endl;
 			return true;
 		}
 	}
@@ -494,7 +494,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 		//cout << "Bicie lewo dol" << endl;
 		if (Bicie(x + 1, y - 1, LDown))
 		{
-			cout << "Tak4" << endl;
+			//cout << "Tak4" << endl;
 			return true;
 		}
 	}
@@ -513,8 +513,9 @@ int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	int x = x1, y = y1;
 
 	licznik = 0;
-	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + LUp[0], y + LUp[1]))
+	while (x + LUp[0] != 7 && x + LUp[0] != 0 && y + LUp[1] != 7 && y + LUp[1] != 0 && !Czy_Jest_Pionek(x + LUp[0], y + LUp[1]))
 	{
+		//cout << "lasagna" << endl;
 		x += LUp[0];
 		y += LUp[1];
 		licznik++;
@@ -530,7 +531,7 @@ int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	x = x1, y = y1;
 
 	licznik = 0;
-	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1]))
+	while (x + RUp[0] != 7 && x + RUp[0] != 0 && y + RUp[1] != 7 && y + RUp[1] != 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1]))
 	{
 		x += RUp[0];
 		y += RUp[1];
@@ -548,7 +549,7 @@ int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	x = x1, y = y1;
 
 	licznik = 0;
-	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1]))
+	while (x + RDown[0] != 7 && x + RDown[0] != 0 && y + RDown[1] != 7 && y + RDown[1] != 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1]))
 	{
 		x += RDown[0];
 		y += RDown[1];
@@ -567,7 +568,7 @@ int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 
 
 	licznik = 0;
-	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1]))
+	while (x + LDown[0] != 7 && x + LDown[0] != 0 && y + LDown[1] != 7 && y + LDown[1] != 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1]))
 	{
 		x += LDown[0];
 		y += LDown[1];

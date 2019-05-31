@@ -86,6 +86,8 @@ public:
 
 	void Nie_Podkladaj_Sie(int, int, Arena&);
 
+	void Damka_Ucieka(int, int, Arena&);
+
 	void Koncowy_Ruch(Arena&);
 
 };
@@ -356,13 +358,14 @@ void AI::Koncowy_Ruch(Arena &A)
 
 			}
 
-			/*if (A.tablica[i][j] == 'X')
+			
+			if (A.tablica[i][j] == 'X')
 			{
 				if (waga < Mozliwe_Bicie_AI_Damka(i, j, A))
 				{
 					cout << "Waga damki" << endl;
 					system("pause");
-					waga = TabBicie[2];
+					waga = TabBicieD[2];
 					TabKoniec[0] = i;
 					TabKoniec[1] = j;
 					TabKoniec[2] = TabBicieD[0];
@@ -371,7 +374,7 @@ void AI::Koncowy_Ruch(Arena &A)
 					punkty++; // Na razie bicie ma najwieksza wage wiec zawsze jak tu wejdziemy bedzie cos sie bilo
 
 				}
-			}*/
+			}
 
 			TabRuch[0] = 0;
 			TabRuch[1] = 0;
@@ -390,12 +393,14 @@ void AI::Koncowy_Ruch(Arena &A)
 		for (int j = 0; j < ROZ; j++)
 		{
 			//cout << tablicaWagRuchow[i][j] << " ";
+			//cout << A.tablica[i][j] << " ";
 			tablicaWagRuchow[i][j] = WzorzecWag[i][j];
 			//cout << tablicaWagRuchow[i][j] << " ";
 		}
 		//cout << endl;
 	}
 	//system("pause");
+
 
 }
 
@@ -531,13 +536,13 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 	if (A.tablica[xp][yp] == 'X')
 	{
-		cout << A.licznik << endl;
+		//cout << A.licznik << endl;
 		//system("pause");
 		switch (A.Czy_Mozliwe_Bicie_Damka(xp, yp))
 		{
 		case 1:
 		{
-			cout << "1" << endl;
+			//cout << "1" << endl;
 			//system("pause");
 			wagakoncowa = 200;
 
@@ -554,7 +559,7 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 		case 2:
 		{
-			cout << "2" << endl;
+			//cout << "2" << endl;
 			//system("pause");
 			wagakoncowa = 200;
 
@@ -571,7 +576,7 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 		case 3:
 		{
-			cout << "3" << endl;
+			//cout << "3" << endl;
 			//system("pause");
 			wagakoncowa = 200;
 			for (int i = 0; i <= A.licznik; i++)
@@ -587,7 +592,7 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 		case 4:
 		{
-			cout << "4" << endl;
+			//cout << "4" << endl;
 			//system("pause");
 			wagakoncowa = 200;
 			for (int i = 0; i <= A.licznik; i++)
@@ -613,6 +618,11 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 	}
 
 	return wagakoncowa;
+}
+
+void AI::Damka_Ucieka(int xp, int yp, Arena& A)
+{
+
 }
 
 
