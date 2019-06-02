@@ -1,52 +1,52 @@
 ﻿  main.cpp
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(70): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(73): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(76): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(79): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(84): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(87): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(90): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(93): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(98): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(101): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(104): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(107): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(91): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(94): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(97): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(100): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(105): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(108): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(111): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(114): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(119): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(122): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(125): warning C4305: "argument": obcięcie z "double" do "float"
 f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(128): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(131): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(134): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(137): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(142): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(145): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(148): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(151): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(156): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(159): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(162): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(165): warning C4305: "argument": obcięcie z "double" do "float"
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1148): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1154): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1160): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1166): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1172): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1178): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1184): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1190): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1196): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1202): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1208): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1214): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1220): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1227): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1233): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1239): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1245): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1251): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1257): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1263): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1269): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1275): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1281): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1287): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(149): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(152): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(155): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(158): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(163): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(166): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(169): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(172): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(177): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(180): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(183): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\wyswietlanie.h(186): warning C4305: "argument": obcięcie z "double" do "float"
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1078): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1084): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1090): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1096): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1102): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1108): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1114): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1120): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1126): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1132): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1138): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1144): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1150): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1157): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1163): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1169): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1175): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1181): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1187): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1193): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1199): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1205): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1211): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+f:\sfml\sfml basic v2\sfml basic v2\arena_sfml.h(1217): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1056): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1062): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1068): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
@@ -96,6 +96,6 @@ f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1375): warning C4305: "argument
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1378): warning C4305: "argument": obcięcie z "double" do "float"
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(1381): warning C4305: "argument": obcięcie z "double" do "float"
 f:\sfml\sfml basic v2\sfml basic v2\nagłówek.h(762): warning C4715: "Arena2::Przesun_Pionek”: niewszystkie ścieżki kodu zwracają wartość
-f:\sfml\sfml basic v2\sfml basic v2\main.cpp(385): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
-f:\sfml\sfml basic v2\sfml basic v2\main.cpp(404): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
+f:\sfml\sfml basic v2\sfml basic v2\main.cpp(225): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
+f:\sfml\sfml basic v2\sfml basic v2\main.cpp(244): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
   SFML Basic v2.vcxproj -> F:\sfml\SFML Basic v2\Debug\SFML Basic v2.exe

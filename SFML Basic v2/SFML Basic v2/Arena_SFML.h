@@ -161,8 +161,6 @@ Arena::Arena(int l) {
 	tablica[7][5] = 'o';
 
 
-	//tablica[4][4] = 'x';
-	//tablica[4][4] = 'O';
 
 }
 
@@ -393,8 +391,6 @@ bool Arena::Czy_Droga_Wolna(int xp, int yp, int xk, int yk)
 		xp += pom[0];
 		yp += pom[1];
 
-		//cout << xp << " " << yp << endl;
-		//system("pause");
 
 		if (Czy_Jest_Pionek(xp, yp))
 		{
@@ -434,67 +430,34 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 	int RDown[2] = { 1,1 };
 	int LDown[2] = { 1,-1 };
 
-	/*
-	if (Bicie(x-1,y-1,LUp)==1 && Czy_Jest_W_Arenie(x-1,y-1))
-	{
-		cout << "Tak1" << endl;
-		return true;
-	}
-	else if (Bicie(x-1, y+1, RUp)==1 && Czy_Jest_W_Arenie(x - 1, y + 1))
-	{
-		cout << "Tak2" << endl;
-		return true;
-	}
-	else if (Bicie(x+1, y+1, RDown)==1 && Czy_Jest_W_Arenie(x + 1, y + 1))
-	{
-		cout << "Tak3" << endl;
-		return true;
-	}
-	else if (Bicie(x+1, y-1, LDown)==1 && Czy_Jest_W_Arenie(x + 1, y - 1))
-	{
-		cout << "Tak4" << endl;
-		return true;
-	}
-
-	else return false;*/
-
 	if (Czy_Jest_W_Arenie(x - 1, y - 1) && x - 1 != 7 && x - 1 != 0 && y - 1 != 7 && y - 1 != 0)
 	{
-		//cout << "Bicie lewo gora" << endl;
-		//cout << x << " " << y << endl;
 		if (Bicie(x - 1, y - 1, LUp))
 		{
-			//cout << "Tak1" << endl;
 			return true;
 		}
 	}
 
 	if (Czy_Jest_W_Arenie(x - 1, y + 1) && x - 1 != 7 && x - 1 != 0 && y + 1 != 7 && y + 1 != 0)
 	{
-		//cout << "Bicie prawo gora" << endl;
 		if (Bicie(x - 1, y + 1, RUp))
 		{
-			//cout << "Tak2" << endl;
 			return true;
 		}
 	}
 
 	if (Czy_Jest_W_Arenie(x + 1, y + 1) && x + 1 != 7 && x + 1 != 0 && y + 1 != 7 && y + 1 != 0)
 	{
-		//cout << "Bicie prawo dol" << endl;
 		if (Bicie(x + 1, y + 1, RDown))
 		{
-			//cout << "Tak3" << endl;
 			return true;
 		}
 	}
 
 	if (Czy_Jest_W_Arenie(x + 1, y - 1) && x + 1 != 7 && x + 1 != 0 && y - 1 != 7 && y - 1 != 0)
 	{
-		//cout << "Bicie lewo dol" << endl;
 		if (Bicie(x + 1, y - 1, LDown))
 		{
-			//cout << "Tak4" << endl;
 			return true;
 		}
 	}
@@ -508,80 +471,49 @@ int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	int RUp[2] = { -1,1 };
 	int RDown[2] = { 1,1 };
 	int LDown[2] = { 1,-1 };
-	
 
 	int x = x1, y = y1;
 
 	licznik = 0;
-	while (x + LUp[0] != 7 && x + LUp[0] != 0 && y + LUp[1] != 7 && y + LUp[1] != 0 && !Czy_Jest_Pionek(x + LUp[0], y + LUp[1]))
-	{
-		//cout << "lasagna" << endl;
+	while (x + LUp[0] < 7 && x + LUp[0] > 0 && y + LUp[1] < 7 && y + LUp[1] > 0 && !Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) {
 		x += LUp[0];
 		y += LUp[1];
 		licznik++;
 	}
-	if (x + LUp[0] != 7 && x + LUp[0] != 0 && y + LUp[1] != 7 && y + LUp[1] != 0 && Czy_Jest_W_Arenie(x + LUp[0], y + LUp[1]) && !Czy_Jest_Pionek(x + LUp[0] - 1, y + LUp[1] - 1))
-	{
-		if (!Czy_Przyjaciel_Damki(x, y, x + LUp[0], y + LUp[1]) && Czy_Jest_Pionek(x + LUp[0], y + LUp[1]))
-		{
-			//cout << "Bicie lewo gora" << endl;
-			return 1;
-		}
-	}
-	x = x1, y = y1;
 
+	if (x + LUp[0] < 7 && x + LUp[0] > 0 && y + LUp[1] < 7 && y + LUp[1] > 0 &&	Czy_Jest_W_Arenie(x + LUp[0], y + LUp[1]) && !Czy_Jest_Pionek(x + LUp[0] - 1, y + LUp[1] - 1))
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + LUp[0], y + LUp[1]) && Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) return 1;
+	x = x1, y = y1;
 	licznik = 0;
-	while (x + RUp[0] != 7 && x + RUp[0] != 0 && y + RUp[1] != 7 && y + RUp[1] != 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1]))
-	{
+
+	while (x + RUp[0] < 7 && x + RUp[0] > 0 && y + RUp[1] < 7 && y + RUp[1] > 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) {
 		x += RUp[0];
 		y += RUp[1];
 		licznik++;
 	}
-	if (x + RUp[0] != 7 && x + RUp[0] != 0 && y + RUp[1] != 7 && y + RUp[1] != 0 && Czy_Jest_W_Arenie(x + RUp[0], y + RUp[1]) && !Czy_Jest_Pionek(x + RUp[0] - 1, y + RUp[1] + 1))
-	{
-		if (!Czy_Przyjaciel_Damki(x, y, x + RUp[0], y + RUp[1]) && Czy_Jest_Pionek(x + RUp[0], y + RUp[1]))
-		{
-			//cout << "Bicie prawo gora" << endl;
-			return 2;
-		}
-	}
-
+	if (x + RUp[0] < 7 && x + RUp[0] > 0 && y + RUp[1] < 7 && y + RUp[1] > 0 &&	Czy_Jest_W_Arenie(x + RUp[0], y + RUp[1]) && !Czy_Jest_Pionek(x + RUp[0] - 1, y + RUp[1] + 1))
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + RUp[0], y + RUp[1]) && Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) return 2;
 	x = x1, y = y1;
-
 	licznik = 0;
-	while (x + RDown[0] != 7 && x + RDown[0] != 0 && y + RDown[1] != 7 && y + RDown[1] != 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1]))
-	{
+
+	while (x + RDown[0] < 7 && x + RDown[0] > 0 && y + RDown[1] < 7 && y + RDown[1] > 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) {
 		x += RDown[0];
 		y += RDown[1];
 		licznik++;
 	}
 
-	if (x + RDown[0] != 7 && x + RDown[0] != 0 && y + RDown[1] != 7 && y + RDown[1] != 0 && Czy_Jest_W_Arenie(x + RDown[0], y + RDown[1]) && !Czy_Jest_Pionek(x + RDown[0] + 1, y + RDown[1] + 1))
-	{
-		if (!Czy_Przyjaciel_Damki(x, y, x + RDown[0], y + RDown[1]) && Czy_Jest_Pionek(x + RDown[0], y + RDown[1]))
-		{
-			//cout << "Bicie prawo dol" << endl;
-			return 3;
-		}
-	}
+	if (x + RDown[0] < 7 && x + RDown[0] > 0 && y + RDown[1] < 7 && y + RDown[1] > 0 &&	Czy_Jest_W_Arenie(x + RDown[0], y + RDown[1]) && !Czy_Jest_Pionek(x + RDown[0] + 1, y + RDown[1] + 1))
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + RDown[0], y + RDown[1]) && Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) return 3;
 	x = x1, y = y1;
-
-
 	licznik = 0;
-	while (x + LDown[0] != 7 && x + LDown[0] != 0 && y + LDown[1] != 7 && y + LDown[1] != 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1]))
-	{
+
+	while (x + LDown[0] < 7 && x + LDown[0] > 0 && y + LDown[1] < 7 && y + LDown[1] > 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) {
 		x += LDown[0];
 		y += LDown[1];
 		licznik++;
 	}
-	if (x + LDown[0] != 7 && x + LDown[0] != 0 && y + LDown[1] != 7 && y + LDown[1] != 0 && Czy_Jest_W_Arenie(x + LDown[0], y + LDown[1]) && !Czy_Jest_Pionek(x + LDown[0] + 1, y + LDown[1] - 1))
-	{
-		if (!Czy_Przyjaciel_Damki(x, y, x + LDown[0], y + LDown[1]) && Czy_Jest_Pionek(x + LDown[0], y + LDown[1]))
-		{
-			//cout << "Bicie lewo dol" << endl;
-			return 4;
-		}
-	}
+	if (x + LDown[0] < 7 && x + LDown[0] > 0 && y + LDown[1] < 7 && y + LDown[1] > 0 && Czy_Jest_W_Arenie(x + LDown[0], y + LDown[1]) && !Czy_Jest_Pionek(x + LDown[0] + 1, y + LDown[1] - 1))
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + LDown[0], y + LDown[1]) && Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) return 4;
 
 	return -1;
 }
@@ -809,8 +741,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E)
 			{	
 			if((tablica[x1][y1]=='X' || tablica[x1][y1]=='O') && !Czy_Droga_Wolna(x1, y1, x2, y2))
 			{
-					//cout << "Droga nie wolna xd" << endl;
-					//system("pause");
 					return -1;
 			}
 			else
@@ -861,7 +791,7 @@ void Arena::Ekran_Koncowy(int punkty1, int punkty2, int gracz)
 
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------------------" << endl;
-	cout << "                                        " << "Gratulacje dla gracza: " << gracz << endl;
+	cout << "                            " << "Gratulacje dla gracza: " << gracz << endl;
 	cout << "---------------------------------------------------------------------------------------------" << endl;
 }
 

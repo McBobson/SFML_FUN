@@ -22,8 +22,14 @@ public:
 	sf::Texture Pole;
 	sf::Texture texture;
 	sf::Texture textureMenu;
+	sf::Texture textureWygrana;
+	sf::Texture texturePrzegranaSI;
+	sf::Texture textureWygranaPVP;
 	sf::Sprite Sprite;
 	sf::Sprite Menu;
+	sf::Sprite Wygrana;
+	sf::Sprite WygranaPVP;
+	sf::Sprite PrzegranaSI;
 	sf::Sprite P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12;
 	sf::Sprite Pc1, Pc2, Pc3, Pc4, Pc5, Pc6, Pc7, Pc8, Pc9, Pc10, Pc11, Pc12;
 
@@ -43,6 +49,21 @@ void Ekran::Tworz_Plansze()
 	textureMenu.setSmooth(true);
 
 	Menu.setTexture(textureMenu);
+
+	textureWygrana.loadFromFile("Wygrana.png");
+	textureWygrana.setSmooth(true);
+
+	Wygrana.setTexture(textureWygrana);
+
+	texturePrzegranaSI.loadFromFile("Przegrana.png");
+	texturePrzegranaSI.setSmooth(true);
+
+	PrzegranaSI.setTexture(texturePrzegranaSI);
+
+	textureWygranaPVP.loadFromFile("WygranaPVP.png");
+	textureWygranaPVP.setSmooth(true);
+
+	WygranaPVP.setTexture(textureWygranaPVP);
 
 	Pole.loadFromFile("Pole.png");
 	DamkaB.loadFromFile("MonD.png");
